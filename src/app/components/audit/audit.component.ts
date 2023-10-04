@@ -98,42 +98,16 @@ export class AuditComponent {
     } else if (e.action == 'Reject') {
       this.takeAction(e.id, false);
     } else if (e.action == 'view') {
-      const blob = new Blob([e.voucherFileBytes], {
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      });
+      const blob = this.commonSvc.base64ToBlob(
+        e.voucherFileBytes,
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      );
       const url = URL.createObjectURL(blob);
 
       const popup = window.open(url, 'Excel Viewer', 'width=800,height=600');
 
       URL.revokeObjectURL(url); // Clean up the URL when done
     } else {
-      // const file = new Blob([e.voucherFileBytes], {
-      //   type: 'application/csv',
-      // });
-      console.log(e.voucherFileBytes);
-      // const blob = new Blob([e.voucherFileBytes], {
-      //   type: 'application/octet-stream',
-      // });
-
-      // const blob = new Blob([e.voucherFileBytes], {
-      //   type: 'application/octet-stream',
-      // });
-
-      // const file = new File([blob], e.voucherFileName, {
-      //   type: 'application/octet-stream',
-      // });
-
-      // const blob = new Blob([e.voucherFileBytes], {
-      //   type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      // });
-
-      // // Trigger the download
-      // saveAs(e.voucherFileBytes, e.voucherFileName);
-
-      //saveAs(blob, e.voucherFileName);
-
-      // saveAs.saveAs(file);
-
       const blob = this.commonSvc.base64ToBlob(
         e.voucherFileBytes,
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
