@@ -49,7 +49,7 @@
                         </mat-icon>
                     </ng-container>
                     <ng-container *ngSwitchCase="'downloadIconAction'">
-                        <div style="cursor: pointer;">
+                        <div style="cursor: pointer;" (click)="emitRowAction(row,button,i)">
 
                             <mat-icon matSuffix>download
 
@@ -75,8 +75,8 @@
                     <ng-container *ngSwitchCase="'action'">
                         <div *ngIf="!row.index">
                             <div class="example-button-row">
-                                <button mat-raised-button color="primary" *ngFor="let button of rowActionIcon; "
-                                    style="margin-left: 5px;">
+                                <button mat-raised-button color="{{button === 'Approve'? 'primary' :'warn'}}"
+                                    *ngFor="let button of rowActionIcon; " style="margin-left: 5px;">
                                     <span style="cursor: pointer;"
                                         (click)="emitRowAction(row,button,i)">{{button}}</span>
                                 </button>
@@ -97,7 +97,7 @@
                     </ng-container>
 
                     <ng-container *ngSwitchDefault>
-                        {{row[column.field]}}
+                        {{column.field === 'position' ? i + 1 : row[column.field]}}
                     </ng-container>
                 </div>
                 <!-- action column -->

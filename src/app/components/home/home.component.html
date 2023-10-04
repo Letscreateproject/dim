@@ -30,7 +30,7 @@
       <div class="sub-side">
         <mat-nav-list>
           <mat-list-item *ngIf="value == 'Operator' || value == 'operator'" [routerLink]="'process'"
-            routerLinkActive="activebutton" class="parent">
+            routerLinkActive="activebutton" class="parent activebutton">
             <img src="assets\ico-1.svg" alt="" class="img-st" />
             <span class="full-width" *ngIf="isExpanded || isShowing">Create Voucher</span>
 
@@ -38,7 +38,7 @@
             *ngIf="isExpanded || isShowing">expand_more</mat-icon> -->
           </mat-list-item>
           <mat-list-item *ngIf="value == 'Manager'|| value == 'manager'" [routerLink]="'voucherlist'"
-            routerLinkActive="activebutton" class="parent">
+            routerLinkActive="activebutton" class="parent activebutton">
             <img src="assets\ico-1.svg" alt="" class="img-st" />
             <span class="full-width" *ngIf="isExpanded || isShowing">Voucher List</span>
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonService } from 'src/app/_services/common/common.service';
 import { Constants } from 'src/app/_services/constants';
 import { NotifierService } from 'src/app/_services/notifier/notifier.service';
 @Component({
@@ -9,7 +10,10 @@ import { NotifierService } from 'src/app/_services/notifier/notifier.service';
 })
 export class UploadComponent {
   files: any[] = [];
-  constructor(private notifer: NotifierService) {}
+  constructor(
+    private notifer: NotifierService,
+    private commonSvc: CommonService
+  ) {}
   /**
    * on file drop handler
    */
@@ -40,10 +44,7 @@ export class UploadComponent {
       event.target.files[0].type ==
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     ) {
-      this.notifer.notify(
-        'Voucher Uploaded Successfully',
-        Constants.SUCCESS_NOTIFIER
-      );
+      this.submitFile(event.target.files[0]);
     } else {
       this.notifer.notify(
         'Voucher Must be in Excel Format',
@@ -98,5 +99,21 @@ export class UploadComponent {
     const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
+  submitFile(payload: any) {
+    this.commonSvc.uploadFile(payload).subscribe({
+      next: (data: any) => {
+        //success
+        this.notifer.notify(
+          'Voucher Uploaded Successfully',
+          Constants.SUCCESS_NOTIFIER
+        );
+      },
+      error: (e: any) => {
+        //error
+        this.notifer.notify('Error in uploading', Constants.ERROR_NOTIFIER);
+      },
+    });
   }
 }

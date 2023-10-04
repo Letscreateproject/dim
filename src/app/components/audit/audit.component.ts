@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { CommonService } from 'src/app/_services/common/common.service';
 import { Constants } from 'src/app/_services/constants';
 import { NotifierService } from 'src/app/_services/notifier/notifier.service';
+import { saveAs } from 'file-saver';
 
 export interface PeriodicElement {
   name: string;
@@ -35,16 +37,13 @@ export interface IColumn {
 })
 export class AuditComponent {
   fieldArray: any[] = [];
-  constructor(private notifer: NotifierService) {}
-  column!: IColumn;
-  title = 'angular-material-app';
   columns: IColumn[] = [
     {
       field: 'position',
       header: 'No.',
     },
     {
-      field: 'name',
+      field: 'voucherFileName',
       header: 'Voucher Name',
     },
 
@@ -78,23 +77,62 @@ export class AuditComponent {
       type: 'status',
     },
   ];
-  dataSource = JSON.parse(JSON.stringify(ELEMENT_DATA));
   displayedColumns = this.columns.map((c) => c.field);
+  dataSource = JSON.parse(JSON.stringify(ELEMENT_DATA));
+  constructor(
+    private commonSvc: CommonService,
+    private notifer: NotifierService
+  ) {}
 
+  ngOnInit(): void {
+    this.getDocList();
+  }
+  column!: IColumn;
+  title = 'angular-material-app';
   buttonAction(e: any) {
     // debugger
     // ELEMENT_DATA.splice(e.i,1);
     // this.dataSource = JSON.parse( JSON.stringify(ELEMENT_DATA));
     if (e.action == 'Approve') {
-      this.notifer.notify(
-        e.name + ' Approved Successfully',
-        Constants.SUCCESS_NOTIFIER
-      );
+      this.takeAction(e.id, true);
     } else if (e.action == 'Reject') {
-      this.notifer.notify(
-        e.name + ' Rejected Successfully',
-        Constants.SUCCESS_NOTIFIER
-      );
+      this.takeAction(e.id, false);
+    } else {
+      const file = new Blob([e], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      });
+      saveAs.saveAs(file, 'test.xlsx');
     }
+  }
+
+  getDocList() {
+    this.commonSvc.getDocList().subscribe({
+      next: (data: any) => {
+        this.dataSource = JSON.parse(JSON.stringify(data));
+      },
+      error: (e: any) => {
+        //error
+        this.notifer.notify('ERROR', Constants.ERROR_NOTIFIER);
+      },
+    });
+  }
+
+  takeAction(id: any, type: any) {
+    const obj = { id, type };
+    this.commonSvc.takeAction(obj).subscribe({
+      next: (data: any) => {
+        let msg = 'Approved Successfully.';
+        if (!type) {
+          msg = 'Rejected Successfully.';
+        }
+
+        this.notifer.notify(msg, Constants.SUCCESS_NOTIFIER);
+        this.getDocList();
+      },
+      error: (e: any) => {
+        //error
+        this.notifer.notify('ERROR', Constants.ERROR_NOTIFIER);
+      },
+    });
   }
 }

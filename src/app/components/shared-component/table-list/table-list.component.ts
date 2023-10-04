@@ -11,6 +11,9 @@ import {
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { CommonService } from 'src/app/_services/common/common.service';
+import { Constants } from 'src/app/_services/constants';
+import { NotifierService } from 'src/app/_services/notifier/notifier.service';
 
 @Component({
   selector: 'app-table-list',
@@ -27,7 +30,10 @@ export class TableListComponent implements OnInit, OnChanges {
   approve: any;
   reject: any;
 
-  constructor() {}
+  constructor(
+    private commonSvc: CommonService,
+    private notifer: NotifierService
+  ) {}
   ngOnChanges(changes: SimpleChanges): void {
     // debugger
     if (changes['columns']?.currentValue) {
