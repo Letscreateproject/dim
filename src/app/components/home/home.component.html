@@ -7,8 +7,14 @@
           (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button> -->
 
       </div>
-      <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon></button>
+      <button mat-icon-button color="primary" [matMenuTriggerFor]="menu" style="width: 80px;
+    color: #333;">
+        <div style="display:flex;text-transform:capitalize ;">
+          <div> <img src="assets\user-name.svg" alt="" /></div>
+          <div>{{value}}</div>
+        </div>
+
+      </button>
 
       <mat-menu #menu="matMenu">
         <button mat-menu-item> <mat-icon>person</mat-icon>
@@ -61,7 +67,7 @@
         </mat-nav-list>
         <mat-nav-list>
         </mat-nav-list>
-        <div class="details-side">
+        <!-- <div class="details-side">
           <div style="display: flex;
        flex-direction: row;">
             <div>
@@ -78,7 +84,7 @@
             Last Login: 04/10/2023 10:20 am
 
           </div>
-        </div>
+        </div> -->
       </div>
     </mat-sidenav>
 

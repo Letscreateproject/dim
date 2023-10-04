@@ -42,14 +42,14 @@
                     <ng-container *ngSwitchCase="'viewIconAction'">
 
                         <mat-icon matSuffix>
-                            <div style="cursor: pointer;">
+                            <div style="cursor: pointer;" (click)="emitRowAction(row,'view',i)">
                                 remove_red_eye
 
                             </div>
                         </mat-icon>
                     </ng-container>
                     <ng-container *ngSwitchCase="'downloadIconAction'">
-                        <div style="cursor: pointer;" (click)="emitRowAction(row,button,i)">
+                        <div style="cursor: pointer;" (click)="emitRowAction(row,'download',i)">
 
                             <mat-icon matSuffix>download
 

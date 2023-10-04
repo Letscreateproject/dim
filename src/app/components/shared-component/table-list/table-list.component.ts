@@ -109,11 +109,13 @@ export class TableListComponent implements OnInit, OnChanges {
     this.showStatus = false;
     if (data.action == 'Approve') {
       row.value = true;
+      row.index = true;
     }
     if (data.action == 'Reject') {
       row.value = false;
+      row.index = true;
     }
-    row.index = true;
+
     // debugger;
   }
   emitIconAction(row: any, action: string) {
