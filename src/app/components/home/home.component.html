@@ -1,0 +1,111 @@
+<p style="    margin-bottom: 0px;" class="p-class">
+  <mat-toolbar style="background: #fff;">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="header-cont">
+      <div fxLayout="row" fxLayoutAlign="flex-start center"><img src="assets\logo.png" alt="" style="width: 60px;" />
+        <!-- <button mat-icon-button
+          (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button> -->
+
+      </div>
+      <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon></button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item> <mat-icon>person</mat-icon>
+          <span>Profile</span></button>
+        <button mat-menu-item routerLink="/login"> <mat-icon>logout</mat-icon>
+          <span>Logout</span></button>
+      </mat-menu>
+    </div>
+
+
+
+  </mat-toolbar>
+</p>
+<!-- <app-menu></app-menu> -->
+<div class="content">
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
+      (mouseleave)="mouseleave()">
+      <div class="sub-side">
+        <mat-nav-list>
+          <mat-list-item *ngIf="value == 'Operator' || value == 'operator'" [routerLink]="'process'"
+            routerLinkActive="activebutton" class="parent">
+            <img src="assets\ico-1.svg" alt="" class="img-st" />
+            <span class="full-width" *ngIf="isExpanded || isShowing">Create Voucher</span>
+
+            <!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}"
+            *ngIf="isExpanded || isShowing">expand_more</mat-icon> -->
+          </mat-list-item>
+          <mat-list-item *ngIf="value == 'Manager'|| value == 'manager'" [routerLink]="'voucherlist'"
+            routerLinkActive="activebutton" class="parent">
+            <img src="assets\ico-1.svg" alt="" class="img-st" />
+            <span class="full-width" *ngIf="isExpanded || isShowing">Voucher List</span>
+
+            <!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}"
+            *ngIf="isExpanded || isShowing">expand_more</mat-icon> -->
+          </mat-list-item>
+          <!-- <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+          <a mat-list-item href="...">Submenu Item 1</a>
+          <a mat-list-item href="...">Submenu Item 2</a>
+          <mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
+            <span class="full-width" *ngIf="isExpanded || isShowing">Nested Menu</span>
+            <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}"
+              *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+          </mat-list-item>
+          <div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing || isExpanded">
+            <mat-list-item>SubSubmenu Item 1</mat-list-item>
+            <mat-list-item>SubSubmenu Item 2</mat-list-item>
+          </div>
+        </div> -->
+        </mat-nav-list>
+        <mat-nav-list>
+        </mat-nav-list>
+        <div class="details-side">
+          <div style="display: flex;
+       flex-direction: row;">
+            <div>
+              <img src="assets\user-name-white.svg" alt="" />
+            </div>
+            <div>
+              John Doe<br>
+
+
+            </div>
+          </div>
+
+          <div>
+            Last Login: 04/10/2023 10:20 am
+
+          </div>
+        </div>
+      </div>
+    </mat-sidenav>
+
+    <div class="example-sidenav-content">
+
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-container>
+  <div class="footer">
+    <div style="display: flex;
+    flex-direction: row;
+    justify-content: space-between;">
+      <div>Copyright © bourntec. All Rights Reserved</div>
+
+      <div style="display: flex;
+        flex-direction: row;gap: 10px;
+        justify-content: space-between;">
+        <a href="javascript:;">Company</a>
+        <a href="javascript:;">Terms of use</a>
+        <a href="javascript:;">Privacy Policy</a>
+        <a href="javascript:;">Cookie policy</a>
+        <a href="javascript:;">Contact us</a>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

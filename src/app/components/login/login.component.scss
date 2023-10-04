@@ -1,0 +1,44 @@
+.example-card {
+    width: 400px;
+}
+.button-act {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.example-card-container {
+    height: 100%;
+}
+
+.login-page{
+    box-shadow: none !important;
+    background: none;
+}
+.login-page ::ng-deep .mat-form-field-outline-start {
+    border-radius: 23px 0 0 23px !important;
+    min-width: 28px !important;
+  }
+  
+  .login-page ::ng-deep .mat-form-field-outline-end {
+    border-radius: 0 23px 23px 0 !important;
+    min-width: 28px !important;
+  }
+  
+  /* Add padding to move the label and input into the center to prevent overlapping the rounded border */
+  .login-page ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 0 32px !important;
+    font-size: 13px;
+  }
+//   .login-page ::ng-deep .mat-form-field-outline  {
+//   color:   #d2d2d2 !important;
+//   }
+
+  .login-page ::ng-deep .mat-form-field-infix{
+    padding-top: 15px !important;
+    padding-bottom: 20px !important;
+  }
+  .log-btn{
+    width: 400px;
+    border-radius: 23px;
+    height: 60px;
+    background-color: #0575E6;color: #fff;
+  }

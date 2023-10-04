@@ -1,0 +1,60 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" class="example-card-container">
+  <img src="assets\logo.png" alt="" style="    width: 75px;" />
+  <div style="font-weight: 600; color:#0575E6 ; font-size: 23px;">Hello Again!</div>
+  <div style="font-weight: 500;">Welcome back to E-Voucher</div>
+  <mat-card class="example-card login-page ">
+    <form [formGroup]="profileForm" (ngSubmit)="submit()">
+      <!-- <mat-card-title>Sign In</mat-card-title> -->
+      <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      <mat-card-content>
+
+        <div fxLayout="column">
+          <mat-form-field appearance="outline">
+            <!-- <mat-label>Username</mat-label> -->
+            <input matInput placeholder="Username/Email" formControlName="username">
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <img matPrefix style="margin-top:-8px" src="assets\user-name.svg" alt="" />
+            <!-- <mat-hint>This is a Hint</mat-hint> -->
+            <mat-error *ngIf="profileForm.get('username').errors?.['required']">
+              Username is required
+            </mat-error>
+            <mat-error *ngIf="profileForm.get('username').errors?.['maxlength']">
+              Only 10 charecters allowed
+            </mat-error>
+            <mat-error *ngIf="profileForm.get('username').errors?.['minlength']">
+              Min 3 needed.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <!-- <mat-label>Password</mat-label> -->
+            <input matInput placeholder="Password" type="password" formControlName="password">
+            <img matPrefix style="margin-top:-8px" src="assets\password.svg" alt="" />
+            <!-- <mat-icon matSuffix>remove_red_eye
+
+
+
+
+
+
+            </mat-icon> -->
+            <mat-error *ngIf="profileForm.get('password').errors?.['required']">
+              This field is required
+            </mat-error>
+          </mat-form-field>
+
+          <a href="javascript:;" style="    color: #333;
+          font-size: 11px;">Forgot Password?</a>
+
+        </div>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="button-act">
+          <button mat-raised-button color="primary" type="submit" class="log-btn">LOGIN</button>
+        </div>
+
+        <!-- <button mat-button>SHARE</button> -->
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
