@@ -1,5 +1,6 @@
 <!-- Filter -->
-<h2 class="common-header">Voucher List</h2>
+<h2 *ngIf="userName == 'manager' || userName == 'Manager'" class="common-header">Voucher List</h2>
+<h2 style="padding: 10px;" *ngIf="userName == 'operator' || userName == 'Operator'" class="common-header">Voucher Status</h2>
 <ng-container *ngIf="isFilterable">
     <mat-form-field>
         <mat-label>Filter</mat-label>
@@ -9,20 +10,11 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" matSort>
     <ng-container *ngFor="let column of columns" [matColumnDef]="column.field">
         <ng-container *ngIf="!column.hidden">
-            <!-- <th mat-header-cell *matHeaderCellDef>
-                {{column.header}}
-            </th> -->
-            <ng-container *ngIf="isSortable; else notSortable">
+           
                 <th mat-header-cell *matHeaderCellDef [mat-sort-header]="column.field">
                     {{column.header}}
                 </th>
-            </ng-container>
-            <!-- else not sortable -->
-            <ng-template #notSortable>
-                <th mat-header-cell *matHeaderCellDef>
-                    {{column.header}}
-                </th>
-            </ng-template>
+            
 
             <td mat-cell *matCellDef="let  row ;let i = index">
                 <div [ngSwitch]="column.type">
@@ -57,13 +49,15 @@
                         </div>
                     </ng-container>
 
+                    <div *ngIf=" userName == 'Manager' || userName == 'manager'" >
                     <ng-container *ngSwitchCase="'textbox'">
-
                         <mat-form-field>
                             <input matInput>
                         </mat-form-field>
+                      
 
                     </ng-container>
+                </div>
                     <!-- <ng-container *ngSwitchCase="'status'">
                             <div *ngIf="row.index" >
                                {{row.value}}
@@ -73,6 +67,7 @@
 
                         </ng-container> -->
                     <ng-container *ngSwitchCase="'action'">
+                        <div *ngIf=" userName == 'Manager' || userName == 'manager'">
                         <div *ngIf="!row.index">
                             <div class="example-button-row">
                                 <button mat-raised-button color="{{button === 'Approve'? 'primary' :'warn'}}"
@@ -93,7 +88,15 @@
                             </div>
 
                         </div>
+                    </div>
 
+                            <div *ngIf="userName == 'operator' || userName == 'Operator'">
+                            <div >
+
+                                Pending
+                            </div>
+
+                        </div>
                     </ng-container>
 
                     <ng-container *ngSwitchDefault>
@@ -116,6 +119,8 @@
         </td>
     </tr>
 </table>
+
+
 <!-- Pagination -->
 <mat-paginator *ngIf="isPageable" [pageSizeOptions]="paginationSizes" [pageSize]="defaultPageSize" showFirstLastButtons>
 </mat-paginator>

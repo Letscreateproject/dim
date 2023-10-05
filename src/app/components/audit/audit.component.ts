@@ -28,6 +28,7 @@ export interface IColumn {
   hidden?: boolean;
   type?: string;
   date?: Date;
+  showheader?:boolean;
 }
 
 @Component({
@@ -37,6 +38,8 @@ export interface IColumn {
 })
 export class AuditComponent {
   fieldArray: any[] = [];
+  userName: any;
+  
   columns: IColumn[] = [
     {
       field: 'position',
@@ -50,7 +53,7 @@ export class AuditComponent {
     // ,
     {
       field: 'textbox',
-      header: 'Comments',
+      header: 'Comment',
       type: 'textbox',
     },
 
@@ -60,6 +63,7 @@ export class AuditComponent {
       type: 'action',
     },
     {
+      
       field: 'viewIconAction',
       header: 'View ',
       type: 'viewIconAction',
@@ -77,6 +81,7 @@ export class AuditComponent {
       type: 'status',
     },
   ];
+ 
   displayedColumns = this.columns.map((c) => c.field);
   dataSource = JSON.parse(JSON.stringify(ELEMENT_DATA));
   constructor(
@@ -86,6 +91,8 @@ export class AuditComponent {
 
   ngOnInit(): void {
     this.getDocList();
+    
+    this.userName = localStorage.getItem('Username')
   }
   column!: IColumn;
   title = 'angular-material-app';

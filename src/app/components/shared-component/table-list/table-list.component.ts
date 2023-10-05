@@ -29,7 +29,7 @@ export class TableListComponent implements OnInit, OnChanges {
   showStatus: boolean = true;
   approve: any;
   reject: any;
-
+userName : any;
   constructor(
     private commonSvc: CommonService,
     private notifer: NotifierService
@@ -73,6 +73,7 @@ export class TableListComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.showStatus = true;
+    this.userName = localStorage.getItem('Username')
   }
 
   ngAfterViewInit(): void {

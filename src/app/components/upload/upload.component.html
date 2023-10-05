@@ -23,6 +23,14 @@
 	</div>
 
 </mat-card>
+<div *ngIf="userName == 'manager' || userName == 'Manager'">
+
+	<app-audit></app-audit>
+</div>
+<div *ngIf="userName == 'operator' || userName == 'Operator'">
+	<app-table-list (rowAction)="buttonAction($event)" [isSortable]="true" [downloadAction]="true" [ViewIconAction]="true"  [isPageable]="true" [data]="dataSource"  [columns]="columns"  ></app-table-list>
+
+</div>
 
 
 <div class="files-list">
